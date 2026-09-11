@@ -1,0 +1,4 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { ReceiptText } from "lucide-react";
+import { EmptySectionPage } from "@/components/empty-section-page";
+export const Route = createFileRoute("/pedidos")({ head: () => ({ meta: [{ title: "Pedidos — Ponto de Apoio" }, { name: "description", content: "Acompanhamento dos pedidos da lanchonete." }, { property: "og:title", content: "Pedidos — Ponto de Apoio" }, { property: "og:description", content: "Acompanhamento dos pedidos da lanchonete." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: () => <EmptySectionPage title="Pedidos" description="A criação e o acompanhamento do fluxo de pedidos acontecerão nesta área." icon={ReceiptText} phase="Fase 5" /> });
