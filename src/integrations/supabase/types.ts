@@ -14,6 +14,72 @@ export type Database = {
   }
   public: {
     Tables: {
+      audit_logs: {
+        Row: {
+          actor_user_id: string | null
+          created_at: string
+          details: Json
+          event: Database["public"]["Enums"]["audit_event"]
+          id: string
+          ip_address: unknown
+          outcome: string
+          target_user_id: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          actor_user_id?: string | null
+          created_at?: string
+          details?: Json
+          event: Database["public"]["Enums"]["audit_event"]
+          id?: string
+          ip_address?: unknown
+          outcome: string
+          target_user_id?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          actor_user_id?: string | null
+          created_at?: string
+          details?: Json
+          event?: Database["public"]["Enums"]["audit_event"]
+          id?: string
+          ip_address?: unknown
+          outcome?: string
+          target_user_id?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      auth_login_security: {
+        Row: {
+          failed_attempts: number
+          identifier_hash: string
+          last_failed_at: string | null
+          lock_level: number
+          locked_until: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          failed_attempts?: number
+          identifier_hash: string
+          last_failed_at?: string | null
+          lock_level?: number
+          locked_until?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          failed_attempts?: number
+          identifier_hash?: string
+          last_failed_at?: string | null
+          lock_level?: number
+          locked_until?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           active: boolean
@@ -74,6 +140,17 @@ export type Database = {
     }
     Enums: {
       app_role: "administrador" | "gerente" | "operador_caixa" | "cozinha"
+      audit_event:
+        | "login_success"
+        | "login_failure"
+        | "account_locked"
+        | "logout"
+        | "magic_link_requested"
+        | "password_reset_requested"
+        | "password_changed"
+        | "admin_user_created"
+        | "admin_user_updated"
+        | "admin_role_changed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -202,6 +279,18 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["administrador", "gerente", "operador_caixa", "cozinha"],
+      audit_event: [
+        "login_success",
+        "login_failure",
+        "account_locked",
+        "logout",
+        "magic_link_requested",
+        "password_reset_requested",
+        "password_changed",
+        "admin_user_created",
+        "admin_user_updated",
+        "admin_role_changed",
+      ],
     },
   },
 } as const
