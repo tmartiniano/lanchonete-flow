@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Settings } from "lucide-react";
 import { EmptySectionPage } from "@/components/empty-section-page";
-export const Route = createFileRoute("/configuracoes")({
+export const Route = createFileRoute("/_authenticated/configuracoes")({
   head: () => ({
     meta: [
       { title: "Configurações — Ponto de Apoio" },

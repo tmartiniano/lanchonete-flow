@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PackageOpen } from "lucide-react";
 import { EmptySectionPage } from "@/components/empty-section-page";
-export const Route = createFileRoute("/produtos")({
+export const Route = createFileRoute("/_authenticated/produtos")({
   head: () => ({
     meta: [
       { title: "Produtos — Ponto de Apoio" },

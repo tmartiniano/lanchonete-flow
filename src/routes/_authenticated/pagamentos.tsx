@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CreditCard } from "lucide-react";
 import { EmptySectionPage } from "@/components/empty-section-page";
-export const Route = createFileRoute("/pagamentos")({
+export const Route = createFileRoute("/_authenticated/pagamentos")({
   head: () => ({
     meta: [
       { title: "Pagamentos — Ponto de Apoio" },

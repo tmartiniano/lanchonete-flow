@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Users } from "lucide-react";
 import { EmptySectionPage } from "@/components/empty-section-page";
-export const Route = createFileRoute("/clientes")({
+export const Route = createFileRoute("/_authenticated/clientes")({
   head: () => ({
     meta: [
       { title: "Clientes — Ponto de Apoio" },

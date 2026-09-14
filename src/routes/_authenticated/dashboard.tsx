@@ -3,7 +3,7 @@ import { ArrowRight, Boxes, ReceiptText, Users } from "lucide-react";
 
 import { AppShell } from "@/components/app-shell";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
       { title: "Dashboard — Ponto de Apoio" },
