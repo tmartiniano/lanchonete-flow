@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Boxes } from "lucide-react";
 import { EmptySectionPage } from "@/components/empty-section-page";
-export const Route = createFileRoute("/categorias")({
+export const Route = createFileRoute("/_authenticated/categorias")({
   head: () => ({
     meta: [
       { title: "Categorias — Ponto de Apoio" },

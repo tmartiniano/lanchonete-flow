@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ReceiptText } from "lucide-react";
 import { EmptySectionPage } from "@/components/empty-section-page";
-export const Route = createFileRoute("/pedidos")({
+export const Route = createFileRoute("/_authenticated/pedidos")({
   head: () => ({
     meta: [
       { title: "Pedidos — Ponto de Apoio" },
