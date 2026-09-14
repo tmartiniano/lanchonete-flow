@@ -16,7 +16,9 @@ export function EmptySectionPage({
   return (
     <AppShell>
       <header className="max-w-2xl">
-        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">Área do sistema</p>
+        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+          Área do sistema
+        </p>
         <h1 className="mt-1 text-2xl font-bold sm:text-3xl">{title}</h1>
         <p className="mt-2 text-sm leading-6 text-muted-foreground">{description}</p>
       </header>
@@ -26,7 +28,9 @@ export function EmptySectionPage({
             <Icon aria-hidden="true" className="size-5" />
           </span>
           <h2 className="mt-4 text-base font-semibold">Área preparada para evolução</h2>
-          <p className="mt-2 text-sm leading-6 text-muted-foreground">Nenhum dado foi incluído nesta etapa. Esta funcionalidade será implementada na {phase}.</p>
+          <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            Nenhum dado foi incluído nesta etapa. Esta funcionalidade será implementada na {phase}.
+          </p>
         </div>
       </section>
     </AppShell>

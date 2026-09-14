@@ -1,4 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PackageOpen } from "lucide-react";
 import { EmptySectionPage } from "@/components/empty-section-page";
-export const Route = createFileRoute("/produtos")({ head: () => ({ meta: [{ title: "Produtos — Ponto de Apoio" }, { name: "description", content: "Área de produtos da lanchonete." }, { property: "og:title", content: "Produtos — Ponto de Apoio" }, { property: "og:description", content: "Área de produtos da lanchonete." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: () => <EmptySectionPage title="Produtos" description="O cardápio, preços, disponibilidade e imagens serão administrados nesta área." icon={PackageOpen} phase="Fase 4" /> });
+export const Route = createFileRoute("/produtos")({
+  head: () => ({
+    meta: [
+      { title: "Produtos — Ponto de Apoio" },
+      { name: "description", content: "Área de produtos da lanchonete." },
+      { property: "og:title", content: "Produtos — Ponto de Apoio" },
+      { property: "og:description", content: "Área de produtos da lanchonete." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: () => (
+    <EmptySectionPage
+      title="Produtos"
+      description="O cardápio, preços, disponibilidade e imagens serão administrados nesta área."
+      icon={PackageOpen}
+      phase="Fase 4"
+    />
+  ),
+});
