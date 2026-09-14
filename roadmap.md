@@ -1,6 +1,7 @@
 # Roteiro do projeto
 
 - [x] Fase 1 — Fundação, layout, navegação, páginas vazias e documentação.
+- [ ] Conectar o projeto externo “trilha-do-sabor”. Bloqueio: a conexão OAuth precisa ser feita pelo usuário em Configurações do projeto → Conectores → Supabase.
 - [ ] Fase 2 — Backend, autenticação e permissões. Bloqueio: próxima etapa ainda não iniciada.
 - [ ] Fase 3 — Modelo de dados, migrations e políticas. Bloqueio: depende da Fase 2.
 - [ ] Fase 4 — Produtos e categorias. Bloqueio: depende da Fase 3.
