@@ -35,8 +35,8 @@ async function audit(
   await supabaseAdmin.from("audit_logs").insert({
     event,
     outcome,
-    actor_user_id: options.actor,
-    target_user_id: options.target,
+    actor_user_id: options.actor ?? null,
+    target_user_id: options.target ?? null,
     details: options.details ?? {},
   });
 }
