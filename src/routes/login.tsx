@@ -13,7 +13,7 @@ type AccessMode = "password" | "magic" | "recovery";
 
 export const Route = createFileRoute("/login")({
   validateSearch: (search: Record<string, unknown>) => ({
-    reason: typeof search.reason === "string" ? search.reason : undefined,
+    reason: typeof search["reason"] === "string" ? search["reason"] : undefined,
   }),
   head: () => ({
     meta: [

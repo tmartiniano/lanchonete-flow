@@ -50,7 +50,7 @@ function Navigation({ mobile = false }: { mobile?: boolean }) {
           const link = (
             <Link
               to={to}
-              activeOptions={{ exact: to === "/" }}
+              activeOptions={{ exact: to === "/dashboard" }}
               className={cn(
                 "flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 "text-foreground/75 hover:bg-foreground/5 data-[status=active]:bg-primary/15 data-[status=active]:font-medium data-[status=active]:text-primary-ink",
@@ -79,7 +79,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     await queryClient.cancelQueries();
     queryClient.clear();
     await supabase.auth.signOut();
-    navigate({ to: "/login", replace: true });
+    navigate({ to: "/login", search: {}, replace: true });
   }
 
   return (
