@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_authenticated")({
   ssr: false,
   beforeLoad: async ({ location }) => {
     const { data, error } = await supabase.auth.getUser();
-    if (error || !data.user) throw redirect({ to: "/login", search: {} });
+    if (error || !data.user) throw redirect({ to: "/login", search: { reason: undefined } });
     const access = await getMyAccess();
     if (!access.authorized) {
       await supabase.auth.signOut();
