@@ -1,5 +1,6 @@
-import { Link } from "@tanstack/react-router";
-import { LogIn, Menu, Search } from "lucide-react";
+import { getRouteApi, Link, useNavigate } from "@tanstack/react-router";
+import { LogOut, Menu, Search } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -15,11 +16,14 @@ import {
 } from "@/components/ui/sheet";
 import { navigationItems } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
+
+const authenticatedRoute = getRouteApi("/_authenticated");
 
 function Brand() {
   return (
     <Link
-      to="/"
+      to="/dashboard"
       className="flex shrink-0 items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
       <span
@@ -67,6 +71,17 @@ function Navigation({ mobile = false }: { mobile?: boolean }) {
 }
 
 export function AppShell({ children }: { children: ReactNode }) {
+  const access = authenticatedRoute.useRouteContext();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  async function signOut() {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/login", replace: true });
+  }
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-20 border-b border-border bg-surface/90 backdrop-blur-sm">
@@ -106,11 +121,13 @@ export function AppShell({ children }: { children: ReactNode }) {
                 className="absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
               />
             </div>
-            <Button asChild variant="outline" size="sm" className="min-h-11 min-w-11">
-              <Link to="/login" aria-label="Entrar">
-                <LogIn aria-hidden="true" />
-                <span className="hidden sm:inline">Entrar</span>
-              </Link>
+            <span className="hidden text-right sm:block">
+              <span className="block text-xs font-medium">{access.profile.full_name}</span>
+              <span className="block text-[10px] text-muted-foreground">{access.role.replace("_", " ")}</span>
+            </span>
+            <Button variant="outline" size="sm" className="min-h-11 min-w-11" onClick={signOut} aria-label="Sair">
+              <LogOut aria-hidden="true" />
+              <span className="hidden sm:inline">Sair</span>
             </Button>
           </div>
         </div>
@@ -124,10 +141,10 @@ export function AppShell({ children }: { children: ReactNode }) {
           <Navigation />
           <div className="mt-auto rounded-md border border-border bg-background/50 p-3">
             <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-              Fase 1 · Fundação
+              Acesso protegido
             </p>
             <p className="mt-1 text-xs text-foreground/70">
-              Estrutura pronta. Os dados entram nas próximas fases.
+              Sessão individual com permissões por perfil.
             </p>
           </div>
         </aside>

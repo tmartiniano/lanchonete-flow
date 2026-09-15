@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 
 export const navigationItems = [
-  { label: "Dashboard", to: "/", number: "01", icon: LayoutDashboard },
+  { label: "Dashboard", to: "/dashboard", number: "01", icon: LayoutDashboard },
   { label: "Produtos", to: "/produtos", number: "02", icon: PackageOpen },
   { label: "Categorias", to: "/categorias", number: "03", icon: Boxes },
   { label: "Clientes", to: "/clientes", number: "04", icon: Users },
