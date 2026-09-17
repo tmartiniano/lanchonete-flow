@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { KeyRound } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -25,9 +25,18 @@ function ResetPasswordPage() {
   const [confirm, setConfirm] = useState("");
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
+  const [validRecovery, setValidRecovery] = useState(false);
+
+  useEffect(() => {
+    setValidRecovery(new URLSearchParams(window.location.hash.slice(1)).get("type") === "recovery");
+  }, []);
 
   async function submit(event: React.FormEvent) {
     event.preventDefault();
+    if (!validRecovery) {
+      setMessage("Este link de recuperação não é válido. Solicite um novo acesso.");
+      return;
+    }
     if (password.length < 8 || password !== confirm) {
       setMessage("Use ao menos 8 caracteres e confirme a mesma senha.");
       return;
@@ -48,7 +57,7 @@ function ResetPasswordPage() {
         <div className="space-y-2"><Label htmlFor="nova-senha">Nova senha</Label><Input id="nova-senha" type="password" autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={8} /></div>
         <div className="space-y-2"><Label htmlFor="confirmar-senha">Confirmar senha</Label><Input id="confirmar-senha" type="password" autoComplete="new-password" value={confirm} onChange={(e) => setConfirm(e.target.value)} required minLength={8} /></div>
         {message && <p role="alert" className="text-sm text-destructive">{message}</p>}
-        <Button className="w-full" disabled={busy}>{busy ? "Salvando…" : "Salvar nova senha"}</Button>
+        <Button className="min-h-11 w-full" disabled={busy || !validRecovery}>{busy ? "Salvando…" : "Salvar nova senha"}</Button>
       </form>
     </section>
   </main>;

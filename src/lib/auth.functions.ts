@@ -163,6 +163,13 @@ export const changePassword = createServerFn({ method: "POST" })
     return { ok: true as const };
   });
 
+export const logLogout = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    await audit("logout", "sucesso", { actor: context.userId });
+    return { ok: true as const };
+  });
+
 export const createTeamUser = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input) => z.object({ fullName: z.string().trim().min(2).max(120), email: emailSchema, role: z.enum(roles) }).parse(input))
