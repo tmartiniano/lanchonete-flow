@@ -1,42 +1,51 @@
-# Arquitetura — Ponto de Apoio
+# Arquitetura — Trilha do Sabor
 
 ## Visão geral
 
-Aplicação web de gestão de lanchonete construída com React 19, TypeScript, TanStack Start/Router, TanStack Query e Tailwind CSS v4. A primeira fase contém apenas a fundação visual, as rotas e a documentação.
+Aplicação web de gestão de lanchonete construída com React 19, TypeScript, TanStack Start/Router, TanStack Query, Tailwind CSS v4 e um projeto Supabase externo. A fundação visual foi preservada e a base de identidade e acesso está implementada.
 
 ## Organização
 
-- `src/routes`: uma rota por área do sistema, com metadados próprios.
-- `src/components`: layout compartilhado e estados de página reutilizáveis.
-- `src/components/ui`: controles visuais acessíveis.
-- `src/lib/navigation.ts`: fonte única dos itens de navegação.
-- `src/styles.css`: tokens semânticos, tipografia e estilos globais.
+- `src/routes`: páginas públicas de acesso e áreas de gestão protegidas.
+- `src/components`: layout compartilhado e controles visuais acessíveis.
+- `src/lib/navigation.ts`: fonte única da navegação principal.
+- `src/lib/auth.functions.ts`: operações de acesso executadas no servidor.
+- `src/styles.css`: cores semânticas, tipografia e estilos globais.
 
-## Limites entre camadas
+## Identidade e segurança
 
-- **Interface:** rotas e componentes apresentam informações e recebem ações.
-- **Regras de negócio:** serão isoladas em funções próprias quando cada módulo for desenvolvido.
-- **Dados:** serão acessados por funções de servidor autenticadas; páginas não terão acesso privilegiado direto.
-- **Backend:** será conectado em uma fase posterior, antes de qualquer autenticação ou persistência.
+- O Supabase externo é a fonte exclusiva de usuários, perfis, papéis, bloqueios e auditoria.
+- As áreas de gestão exigem uma sessão válida, perfil ativo e papel atribuído.
+- Papéis ficam em `user_roles`, separados dos dados pessoais em `profiles`.
+- As quatro tabelas de acesso têm RLS; usuários comuns consultam somente o próprio perfil e papel.
+- A criação de usuários exige um administrador autenticado e é executada no servidor.
+- Senhas provisórias exigem troca no primeiro acesso.
+- Cinco falhas consecutivas bloqueiam o acesso de forma progressiva, começando em 15 minutos.
+- Logs de acesso e ações administrativas são imutáveis e visíveis somente para administradores.
+- Chaves privadas ficam disponíveis apenas no servidor por armazenamento seguro.
 
-## Segurança e configuração
+## Fluxos disponíveis
 
-- Chaves privadas, tokens e senhas nunca ficam no código-fonte.
-- Configurações públicas usam variáveis de ambiente próprias para o navegador.
-- Credenciais privadas ficam disponíveis somente no servidor por armazenamento seguro.
-- Páginas privadas e operações de dados terão validação independente de autenticação.
-- Permissões serão aplicadas no banco antes da implementação dos cadastros.
+- Login por e-mail e senha.
+- Link mágico sem criação pública de conta.
+- Solicitação e página de recuperação de senha.
+- Troca obrigatória da senha provisória.
+- Cadastro de usuário e atribuição do perfil inicial por administrador.
+- Saída segura, com limpeza dos dados protegidos e registro de auditoria.
+
+## Pendências da configuração inicial
+
+1. Criar o primeiro administrador no painel do Supabase com e-mail confirmado e senha provisória.
+2. Associar esse usuário ao perfil `administrador` no banco.
+3. Confirmar no Supabase Auth: cadastro público desativado, confirmação obrigatória desativada, URLs permitidas e envio de e-mails.
+4. Executar os testes autenticados dos quatro perfis após a existência das contas.
 
 ## Próximas fases
 
-1. Backend, autenticação, recuperação de senha e permissões.
-2. Modelo relacional, migrations e políticas de segurança.
-3. Produtos e categorias.
-4. Clientes e pedidos.
-5. Pagamentos e regras financeiras aprovadas.
-6. Relatórios baseados em dados reais.
-7. Integrações aprovadas, testes finais e implantação.
+1. Produtos e categorias.
+2. Clientes e pedidos.
+3. Pagamentos e regras financeiras aprovadas.
+4. Relatórios baseados em dados reais.
+5. Integrações aprovadas, testes finais e implantação.
 
-## Fora da Fase 1
-
-Não há banco conectado, tabelas, migrations, autenticação funcional, CRUD, dados de produção, integrações externas, IA, relatórios finais ou regras financeiras definitivas.
+Nenhuma tabela ou funcionalidade de produtos, categorias, clientes, pedidos, pagamentos ou relatórios foi criada nesta etapa.
