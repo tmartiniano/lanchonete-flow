@@ -4,9 +4,9 @@ import { EmptySectionPage } from "@/components/empty-section-page";
 export const Route = createFileRoute("/_authenticated/pagamentos")({
   head: () => ({
     meta: [
-      { title: "Pagamentos — Ponto de Apoio" },
+      { title: "Pagamentos — Trilha do Sabor" },
       { name: "description", content: "Gestão dos pagamentos da lanchonete." },
-      { property: "og:title", content: "Pagamentos — Ponto de Apoio" },
+      { property: "og:title", content: "Pagamentos — Trilha do Sabor" },
       { property: "og:description", content: "Gestão dos pagamentos da lanchonete." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

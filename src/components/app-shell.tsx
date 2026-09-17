@@ -1,4 +1,5 @@
 import { getRouteApi, Link, useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { LogOut, Menu, Search } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import type { ReactNode } from "react";
@@ -17,6 +18,7 @@ import {
 import { navigationItems } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
+import { logLogout } from "@/lib/auth.functions";
 
 const authenticatedRoute = getRouteApi("/_authenticated");
 
@@ -33,7 +35,7 @@ function Brand() {
         P
       </span>
       <span className="leading-tight">
-        <span className="block text-[15px] font-semibold">Ponto de Apoio</span>
+        <span className="block text-[15px] font-semibold">Trilha do Sabor</span>
         <span className="hidden font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground sm:block">
           Painel de gestão
         </span>
@@ -74,10 +76,16 @@ export function AppShell({ children }: { children: ReactNode }) {
   const access = authenticatedRoute.useRouteContext();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const registerLogout = useServerFn(logLogout);
 
   async function signOut() {
     await queryClient.cancelQueries();
     queryClient.clear();
+    try {
+      await registerLogout();
+    } catch {
+      // A saída continua mesmo se o registro de auditoria estiver indisponível.
+    }
     await supabase.auth.signOut();
     navigate({ to: "/login", search: { reason: undefined }, replace: true });
   }
@@ -99,7 +107,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             </SheetTrigger>
             <SheetContent side="left" className="w-[280px] bg-surface p-4">
               <SheetHeader className="text-left">
-                <SheetTitle>Ponto de Apoio</SheetTitle>
+                <SheetTitle>Trilha do Sabor</SheetTitle>
                 <SheetDescription>Navegação principal</SheetDescription>
               </SheetHeader>
               <div className="mt-6">
