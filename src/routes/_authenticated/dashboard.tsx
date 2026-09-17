@@ -6,9 +6,9 @@ import { AppShell } from "@/components/app-shell";
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
-      { title: "Dashboard — Ponto de Apoio" },
+      { title: "Dashboard — Trilha do Sabor" },
       { name: "description", content: "Visão geral da operação da lanchonete." },
-      { property: "og:title", content: "Dashboard — Ponto de Apoio" },
+      { property: "og:title", content: "Dashboard — Trilha do Sabor" },
       { property: "og:description", content: "Visão geral da operação da lanchonete." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

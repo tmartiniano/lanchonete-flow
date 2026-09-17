@@ -4,9 +4,9 @@ import { EmptySectionPage } from "@/components/empty-section-page";
 export const Route = createFileRoute("/_authenticated/produtos")({
   head: () => ({
     meta: [
-      { title: "Produtos — Ponto de Apoio" },
+      { title: "Produtos — Trilha do Sabor" },
       { name: "description", content: "Área de produtos da lanchonete." },
-      { property: "og:title", content: "Produtos — Ponto de Apoio" },
+      { property: "og:title", content: "Produtos — Trilha do Sabor" },
       { property: "og:description", content: "Área de produtos da lanchonete." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
